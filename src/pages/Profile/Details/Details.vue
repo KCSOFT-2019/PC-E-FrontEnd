@@ -13,7 +13,7 @@
         <v-list-item-group color="primary">
           <v-list-item v-for="list in lists" :key="list.icon">
             <v-list-item-icon>
-              <v-icon v-text="list.icon"></v-icon>
+              <v-icon></v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               {{ list.item }}
@@ -30,15 +30,20 @@
 
 <script>
 import ToolBar from "@/components/ToolBar/ToolBar";
+import { request } from "@/utils/request";
 export default {
   data() {
     return {
       lists: [
-        { icon: "mdi-phone", item: "电话", details: "8208208820" },
+        {
+          icon: "mdi-phone",
+          item: "电话",
+          details: `812948121`,
+        },
         {
           icon: "mdi-school-outline",
           item: "学院",
-          details: "通信与信息工程学院",
+          details: "通信",
         },
         {
           icon: "mdi-card-account-details-outline",
@@ -46,10 +51,24 @@ export default {
           details: "张三",
         },
       ],
+      userinfo: [],
     };
   },
   components: {
     ToolBar,
+  },
+
+  mounted() {
+    request({
+      url: "/profile",
+      method: "get",
+    })
+      .then((res) => {
+        this.userinfo = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

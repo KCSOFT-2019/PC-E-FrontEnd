@@ -5,7 +5,6 @@
         <v-icon @click="$router.back(-1)">mdi-chevron-left</v-icon>
       </template>
       <template v-slot:title>我的信息</template>
-      <!-- <template v-slot:todo>修改</template> -->
     </ToolBar>
 
     <v-card flat tile class="mt-3">
@@ -30,6 +29,9 @@
 
 <script>
 import ToolBar from "@/components/ToolBar/ToolBar";
+
+import { request } from "@/utils/request";
+
 export default {
   data() {
     return {
@@ -50,6 +52,19 @@ export default {
   },
   components: {
     ToolBar,
+  },
+
+  mounted() {
+    request({
+      url: "/profile",
+      method: "get",
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

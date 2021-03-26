@@ -60,7 +60,9 @@ import { request } from "@/utils/request";
 // import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      userInfo: [],
+    };
   },
   components: {
     Footer,
@@ -72,6 +74,7 @@ export default {
     })
       .then((res) => {
         console.log(res);
+        console.log(1111);
       })
       .catch((err) => {
         console.log(err);

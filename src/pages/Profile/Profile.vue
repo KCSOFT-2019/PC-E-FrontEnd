@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="top">
-      <v-card-title class="white--text">昵称</v-card-title>
+      <v-card-title class="white--text">{{ userInfo.name }}</v-card-title>
       <v-avatar color="primary" size="56" class="avatar">
-        <span class="white--text headline">浩燃</span>
+        <span class="white--text headline">{{ avatarInfo }}</span>
       </v-avatar>
     </div>
     <v-card height="80px" flat>
@@ -61,9 +61,31 @@
 <script>
 import Footer from "@/components/Footer/Footer";
 
+import { request } from "@/utils/request";
 export default {
   components: {
     Footer,
+  },
+  data() {
+    return {
+      userInfo: [],
+      avatarInfo: "",
+    };
+  },
+
+  mounted() {
+    request({
+      url: "/profile",
+      method: "get",
+    })
+      .then((res) => {
+        console.log(res);
+        this.userInfo = res.data;
+        this.avatarInfo = this.userInfo.name.split("").splice(1).join("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

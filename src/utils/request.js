@@ -3,17 +3,12 @@ import axios from 'axios';
 export function request(config) {
   // 1. 创建 axios 实例
   const instance = axios.create({
-    baseURL: 'http://jp-tyo-dvm.sakurafrp.com:64289',
+    baseURL: 'http://s0.s100.vip:11807',
     timeout: 5000
   });
 
   // 2. 拦截器
   instance.interceptors.request.use(config => {
-    // 每次请求都为http头增加Authorization字段，其内容为Token
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   config.headers.common['Authorization'] = token;
-    // }
     if (localStorage.getItem('Authorization')) {
       config.headers.Authorization = localStorage.getItem('Authorization');
     }
@@ -26,7 +21,7 @@ export function request(config) {
 
     return Promise.resolve(res);
   }, err => {
-    return Promise.reject(rr);
+    return Promise.reject(err);
   })
 
 
