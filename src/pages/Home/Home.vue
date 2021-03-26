@@ -1,70 +1,140 @@
 <template>
   <div>
-    <ToolBar>
-      <template v-slot:logo>
-        <v-avatar>
-          <img src="../../assets/Xust.jpg" alt="" />
-        </v-avatar>
-      </template>
-      <template v-slot:title>我要发布</template>
-      <template v-slot:todo>发布</template>
-    </ToolBar>
-
-    <v-form class="mt-3">
-      <div class="type">
-        <div style="font-weight: 600; font-size: 14px" class="mx-2">类型</div>
-        <input type="text" class="ipt ml-2" placeholder="输入电脑故障类型" />
-      </div>
-      <div class="mt-2" style="background-color: white">
-        <v-textarea solo flat no-resize label="详细恰当的描述"></v-textarea>
-        <div style="width: 90vw">
-          <v-file-input
-            prepend-icon="mdi-camera-outline"
-            accept="image/*"
-            label="File input"
-            width="100px"
+    <v-toolbar flat class="top">
+      <v-toolbar-title class="grey--text lighten-4"
+        >dog-fucked-E</v-toolbar-title
+      >
+    </v-toolbar>
+    <v-card class="my-3" flat>
+      <div class="tag">未解决</div>
+      <div class="card-top">
+        <div>
+          <v-avatar color="primary" size="48" rounded>
+            <span class="white--text headline">燃</span>
+          </v-avatar>
+        </div>
+        <div class="ml-2 userInfo">
+          <span>浩然</span>
+          <span style="font-size: 12px" class="grey--text lighten-4"
+            >1天前 03-23 23:59</span
           >
-          </v-file-input>
         </div>
       </div>
-    </v-form>
+      <div class="my-2">#类型：给老子修电脑#</div>
+      <div>描述：我**你个**</div>
+      <v-img src="../../assets/img.jpg"></v-img>
+      <v-divider class="my-1"></v-divider>
+      <v-card-actions class="grey lighten-4">
+        <v-btn depressed block>
+          <v-icon>mdi-comment-processing-outline</v-icon>
+          评论
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <v-card class="my-3" flat>
+      <div class="tag">未解决</div>
+      <div class="card-top">
+        <div>
+          <v-avatar color="primary" size="48" rounded>
+            <span class="white--text headline">燃</span>
+          </v-avatar>
+        </div>
+        <div class="ml-2 userInfo">
+          <span>浩然</span>
+          <span style="font-size: 12px" class="grey--text lighten-4"
+            >1天前 03-23 23:59</span
+          >
+        </div>
+      </div>
+      <div class="my-2">#类型：给老子修电脑#</div>
+      <div>描述：我**你个**</div>
+      <v-img src="../../assets/img.jpg"></v-img>
+      <v-divider class="my-1"></v-divider>
+      <v-card-actions class="grey lighten-4">
+        <v-btn depressed block>
+          <v-icon>mdi-comment-processing-outline</v-icon>
+          评论
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-card class="my-3" flat>
+      <div class="tag">未解决</div>
+      <div class="card-top">
+        <div>
+          <v-avatar color="primary" size="48" rounded>
+            <span class="white--text headline">燃</span>
+          </v-avatar>
+        </div>
+        <div class="ml-2 userInfo">
+          <span>浩然</span>
+          <span style="font-size: 12px" class="grey--text lighten-4"
+            >1天前 03-23 23:59</span
+          >
+        </div>
+      </div>
+      <div class="my-2">#类型：给老子修电脑#</div>
+      <div>描述：我**你个**</div>
+      <v-img src="../../assets/img.jpg"></v-img>
+      <v-divider class="my-1"></v-divider>
+      <v-card-actions class="grey lighten-4">
+        <v-btn depressed block>
+          <v-icon>mdi-comment-processing-outline</v-icon>
+          评论
+        </v-btn>
+      </v-card-actions>
+    </v-card>
     <Footer></Footer>
   </div>
 </template>
-       
-<script>
-import ToolBar from "@/components/ToolBar/ToolBar";
-import Footer from "@/components/Footer/Footer";
 
+<script>
+import axios from "axios";
+
+import Footer from "@/components/Footer/Footer";
 export default {
   data() {
-    return {};
+    return {
+      Info: [],
+    };
   },
   components: {
-    ToolBar,
     Footer,
+  },
+
+  mouted() {
+    axios({
+      url: `http://111.229.238.150:8888/`,
+      method: "GET",
+    });
   },
 };
 </script>
 
 <style scoped>
-.type {
-  height: 40px;
+.top {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fff;
+  justify-content: center;
 }
 
-input::-webkit-input-placeholder {
-  font-size: 12px;
+.card-top {
+  display: flex;
 }
 
-.ipt {
-  outline-style: none;
+.userInfo {
+  display: flex;
+  flex-direction: column;
 }
-
-.addImg {
-  border: 1px solid #eee;
+.tag {
+  width: 60px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  background-color: #d90429;
+  position: absolute;
+  right: 3px;
+  color: #d4a373;
+  font-size: 14px;
+  top: -3px;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <v-app id="app">
-    <Footer></Footer>
     <v-main>
       <router-view />
     </v-main>
@@ -8,7 +7,7 @@
 </template>
 
 <script>
-import Footer from "./components/Footer/Footer";
+import Footer from "@/components/Footer/Footer";
 export default {
   components: {
     Footer,

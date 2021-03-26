@@ -4,7 +4,7 @@
       <template v-slot:logo>
         <v-icon @click="$router.back(-1)">mdi-chevron-left</v-icon>
       </template>
-      <template v-slot:title>我发布的</template>
+      <template v-slot:title>精选收藏</template>
     </ToolBar>
     <v-card class="my-3" flat>
       <div class="tag">未解决</div>
@@ -42,6 +42,7 @@ export default {
   components: {
     ToolBar,
   },
+  methods: {},
 };
 </script>
 

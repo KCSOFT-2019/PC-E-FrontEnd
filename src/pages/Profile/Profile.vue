@@ -1,26 +1,22 @@
 <template>
   <div>
     <div class="top">
-      <v-card-title class="white--text"></v-card-title>
-      <v-avatar color="primary" size="64" class="avatar">
-        <span class="white--text headline"></span>
+      <v-card-title class="white--text">昵称</v-card-title>
+      <v-avatar color="primary" size="56" class="avatar">
+        <span class="white--text headline">浩燃</span>
       </v-avatar>
     </div>
     <v-card height="80px" flat>
       <v-card-actions class="list">
-        <v-btn depressed width="25%" text to="/attention">
+        <v-btn depressed class="white" width="30vw" to="/attention">
           <span>关注</span>
           <span>0</span>
         </v-btn>
-        <v-btn depressed class="white" width="25%" text to="/fans">
+        <v-btn depressed class="white" width="30vw" to="/fans">
           <span>粉丝</span>
           <span>0</span>
         </v-btn>
-        <v-btn depressed class="white" width="25%" text to="/article">
-          <span>帖子</span>
-          <span>0</span>
-        </v-btn>
-        <v-btn depressed class="white" width="25%" text to="/favorites">
+        <v-btn depressed class="white" width="30vw" to="/favorites">
           <span>收藏</span>
           <span>0</span>
         </v-btn>
@@ -49,34 +45,25 @@
           >mdi-chevron-right</v-icon
         >
       </div>
-      <Footer></Footer>
+      <v-divider></v-divider>
+      <div>
+        <v-icon class="mx-3">mdi-check-outline</v-icon>
+        我完成的
+        <v-icon style="position: absolute; right: 10px; line-height: 40px"
+          >mdi-chevron-right</v-icon
+        >
+      </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Footer from "@/components/Footer/Footer";
-import { request } from "@/utils/request";
-// import axios from "axios";
+
 export default {
-  data() {
-    return {};
-  },
   components: {
     Footer,
-  },
-  mounted() {
-    request({
-      url: "/profile",
-      method: "get",
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        // this.$router.push("/404");
-      });
   },
 };
 </script>
@@ -86,13 +73,13 @@ export default {
   width: 100%;
   height: 100px;
   position: relative;
-  background: url("../../assets/img.jpg");
+  background: url("../../assets/bg.jpg") no-repeat;
   background-size: cover;
+  background-position: center;
 }
 .avatar {
   position: absolute;
   right: 10px;
-  top: 65px;
   z-index: 10;
 }
 .list {
@@ -108,6 +95,6 @@ export default {
 }
 
 .items {
-  height: 80px;
+  height: 120px;
 }
 </style>
