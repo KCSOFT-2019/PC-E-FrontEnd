@@ -33,10 +33,17 @@ const routes = [
     component: () => import('../pages/Fans/Fans')
   },
   {
+    path: '/myposts',
+    component: () => import('../pages/myPosts/Posts')
+  },
+  {
     path: '/favorites',
     component: () => import('../pages/Favorites/Favorites')
   },
-
+  {
+    path: '/othersprofile',
+    component: () => import('../pages/OthersProfile/OthersProfile')
+  },
   {
     path: '/profiledetails',
     component: () => import('../pages/Profile/Details/Details')

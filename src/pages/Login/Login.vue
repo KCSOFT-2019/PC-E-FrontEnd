@@ -34,12 +34,6 @@ export default {
             _this.changeLogin({ Authorization: _this.userToken });
             this.$router.push("/home");
           }
-          // debugger;
-
-          // console.log(res);
-          // if (res.data.status === 200) {
-          //   this.$router.push("/home");
-          // }
         })
         .catch((err) => {
           console.log(err);

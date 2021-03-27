@@ -1,148 +1,147 @@
 <template>
   <div>
-    <v-toolbar flat class="top">
-      <v-toolbar-title class="grey--text lighten-4"
-        >dog-fucked-E</v-toolbar-title
-      >
-    </v-toolbar>
+    <ToolBar>
+      <template v-slot:logo>
+        <v-avatar>
+          <img src="../../assets/Xust.jpg" alt="" />
+        </v-avatar>
+      </template>
+      <template v-slot:title>我要发布</template>
+      <template v-slot:todo>
+        <span @click="submitForm">发布</span>
+      </template>
+    </ToolBar>
 
-    <v-card class="my-3" flat v-for="item in Info" :key="item.id">
-      <div class="tag">{{ item.currentStatus }}</div>
-      <div class="card-top">
-        <div>
-          <v-avatar color="primary" size="48" rounded>
-            <span class="white--text headline">燃</span>
-          </v-avatar>
-        </div>
-        <div class="ml-2 userInfo">
-          <span>{{ item.userName }}</span>
-          <span style="font-size: 12px" class="grey--text lighten-4">{{
-            item.createTime
-          }}</span>
+    <v-form
+      class="mt-3"
+      enctype="multipart/form-data"
+      method="post"
+      name="fileinfo"
+    >
+      <div class="type_input_container">
+        <div style="font-weight: 600; font-size: 14px" class="mx-2">类型</div>
+        <input
+          type="text"
+          class="type__input ml-2"
+          placeholder="输入电脑故障类型"
+          name="type"
+          v-model="fault__type"
+        />
+      </div>
+      <div class="mt-2" style="background-color: white">
+        <v-textarea
+          solo
+          flat
+          no-resize
+          label="详细恰当的描述"
+          name="description"
+          v-model="description"
+        ></v-textarea>
+        <div class="post_image_container">
+          <input
+            type="file"
+            multiple="multiple"
+            accept="image/*"
+            name="image"
+            @change="img__file($event)"
+          />
+          <img src="" alt="" id="a1" class="post__image" />
         </div>
       </div>
-      <div class="my-2">#类型： {{ item.fixType }}#</div>
-      <div>描述：{{ item.description }}</div>
-      <v-img src="../../assets/img.jpg"></v-img>
-      <v-divider class="my-1"></v-divider>
-      <v-card-actions class="grey lighten-4">
-        <v-btn depressed block>
-          <v-icon>mdi-comment-processing-outline</v-icon>
-          评论
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-
-    <!-- <v-card class="my-3" flat>
-      <div class="tag">未解决</div>
-      <div class="card-top">
-        <div>
-          <v-avatar color="primary" size="48" rounded>
-            <span class="white--text headline">燃</span>
-          </v-avatar>
-        </div>
-        <div class="ml-2 userInfo">
-          <span>浩然</span>
-          <span style="font-size: 12px" class="grey--text lighten-4"
-            >1天前 03-23 23:59</span
-          >
-        </div>
-      </div>
-      <div class="my-2">#类型：给老子修电脑#</div>
-      <div>描述：我**你个**</div>
-      <v-img src="../../assets/img.jpg"></v-img>
-      <v-divider class="my-1"></v-divider>
-      <v-card-actions class="grey lighten-4">
-        <v-btn depressed block>
-          <v-icon>mdi-comment-processing-outline</v-icon>
-          评论
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-    <v-card class="my-3" flat>
-      <div class="tag">未解决</div>
-      <div class="card-top">
-        <div>
-          <v-avatar color="primary" size="48" rounded>
-            <span class="white--text headline">燃</span>
-          </v-avatar>
-        </div>
-        <div class="ml-2 userInfo">
-          <span>浩然</span>
-          <span style="font-size: 12px" class="grey--text lighten-4"
-            >1天前 03-23 23:59</span
-          >
-        </div>
-      </div>
-      <div class="my-2">#类型：给老子修电脑#</div>
-      <div>描述：我**你个**</div>
-      <v-img src="../../assets/img.jpg"></v-img>
-      <v-divider class="my-1"></v-divider>
-      <v-card-actions class="grey lighten-4">
-        <v-btn depressed block>
-          <v-icon>mdi-comment-processing-outline</v-icon>
-          评论
-        </v-btn>
-      </v-card-actions>
-    </v-card> -->
+    </v-form>
     <Footer></Footer>
   </div>
 </template>
-
+       
 <script>
-import axios from "axios";
-import { request } from "@/utils/request";
+import ToolBar from "@/components/ToolBar/ToolBar";
 import Footer from "@/components/Footer/Footer";
+
+import { request } from "@/utils/request";
+
 export default {
   data() {
     return {
-      Info: [],
-      currentTime: "",
+      file: null,
+      fault__type: null,
+      description: null,
     };
   },
   components: {
+    ToolBar,
     Footer,
   },
-
-  mounted() {
-    request({
-      url: "/form",
-      method: "GET",
-    }).then((res) => {
-      console.log(res);
-      this.Info = res.data;
-      this.currentTime = Date.now();
-      // console.log(this.currentTime);
-    });
+  methods: {
+    img__file(event) {
+      this.file = event.target.files[0];
+      console.log(this.file);
+      var URL = window.URL || window.webkitURL;
+      let imgURL = URL.createObjectURL(this.file);
+      document.getElementById("a1").src = imgURL;
+    },
+    submitForm() {
+      if (this.fault__type === null) {
+        alert("输类型，傻逼");
+        return;
+      } else if (this.description === null) {
+        alert("输描述啊傻逼");
+        return;
+      } else if (this.file === null) {
+        alert("上传文件啊傻逼");
+        return;
+      } else {
+        var formData = new FormData();
+        formData.append("file", this.file);
+        formData.append("type", this.fault__type);
+        formData.append("description", this.description);
+        request({
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          url: "/form/addOne",
+          method: "POST",
+          data: formData,
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        document.getElementById("a1").src = "";
+        this.fault__type = "";
+        this.description = "";
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-.top {
+.type_input_container {
+  height: 40px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
 }
 
-.card-top {
-  display: flex;
+input::-webkit-input-placeholder {
+  font-size: 12px;
 }
 
-.userInfo {
-  display: flex;
-  flex-direction: column;
+.type__input {
+  outline-style: none;
+  /* object-fit: contain; */
+  width: 80vw;
 }
-.tag {
-  /* width: 60px; */
-  padding: 0 10px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  background-color: #d90429;
-  position: absolute;
-  right: 3px;
-  color: #d4a373;
-  font-size: 14px;
-  top: -3px;
+
+.post__image__container {
+  width: 100%;
+  object-fit: contain;
+}
+
+.post__image {
+  width: 100%;
 }
 </style>
