@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       myPosts: [],
-      // currentTime: "",
     };
   },
   components: {
@@ -89,7 +88,6 @@ export default {
     }).then((res) => {
       console.log(res);
       this.myPosts = res.data;
-      // this.currentTime = Date.now();
     });
   },
 };
@@ -110,7 +108,6 @@ export default {
   flex-direction: column;
 }
 .tag {
-  /* width: 60px; */
   padding: 0 10px;
   height: 25px;
   display: flex;
