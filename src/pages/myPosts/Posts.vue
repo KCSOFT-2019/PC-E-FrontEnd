@@ -8,7 +8,7 @@
     </ToolBar>
 
     <v-card class="my-3" flat v-for="item in myPosts" :key="item.id">
-      <div class="tag">{{ item.currentStatus }}</div>
+      <!-- <div class="tag">{{ item.currentStatus }}</div> -->
       <div class="card-top">
         <div>
           <v-avatar color="primary" size="48" rounded>
@@ -31,18 +31,7 @@
           <v-icon>mdi-comment-processing-outline</v-icon>
           评论
         </v-btn>
-        <button
-          @click="deletePost(item.id)"
-          style="
-            position: absolute;
-            top: 30px;
-            right: 10px;
-            background-color: blue;
-            color: white;
-          "
-        >
-          删除
-        </button>
+        <button @click="deletePost(item.id)" class="post__delete">删除</button>
       </v-card-actions>
     </v-card>
   </div>
@@ -64,7 +53,6 @@ export default {
   },
   methods: {
     deletePost(id) {
-      // console.log(id);
       request({
         url: `/form/delete?q=${id}`,
         method: "DELETE",
@@ -94,11 +82,6 @@ export default {
 </script>
 
 <style scoped>
-.top {
-  display: flex;
-  justify-content: center;
-}
-
 .card-top {
   display: flex;
 }
@@ -107,7 +90,15 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.tag {
+
+.post__delete {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background-color: blue;
+  color: white;
+}
+/* .tag {
   padding: 0 10px;
   height: 25px;
   display: flex;
@@ -118,5 +109,5 @@ export default {
   color: #d4a373;
   font-size: 14px;
   top: -3px;
-}
+} */
 </style>

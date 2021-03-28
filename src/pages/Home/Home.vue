@@ -109,8 +109,8 @@ export default {
             console.log(err);
           });
         document.getElementById("a1").src = "";
-        this.fault__type = "";
-        this.description = "";
+        this.fault__type = null;
+        this.description = null;
       }
     },
   },
@@ -132,7 +132,6 @@ input::-webkit-input-placeholder {
 
 .type__input {
   outline-style: none;
-  /* object-fit: contain; */
   width: 80vw;
 }
 
